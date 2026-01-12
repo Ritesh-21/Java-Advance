@@ -1,0 +1,45 @@
+import java.sql.*;
+
+public class Tut6 {
+    public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/my_db";
+        String username = "root";
+        String password = "Ritesh2131";
+
+        String query = "insert into student (id, name, job_title, salary) values (3, 'Suhani', 'SDE-4', 50000);";
+
+        try {
+            // Step 1: Load the MySQL JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            System.out.println("✅ JDBC Driver loaded successfully!");
+        } catch (ClassNotFoundException e) {
+            System.out.println("❌ JDBC Driver not found: " + e.getMessage());
+        }
+
+        try{
+
+            Connection con = DriverManager.getConnection(url,username,password);
+            System.out.println("Connection established ");
+            Statement smt = con.createStatement();
+           int rowsaffected = smt.executeUpdate(query);
+
+           if (rowsaffected>0){
+               System.out.println("Insertion Successful");
+           }
+           else{
+               System.out.println("kuch to gadbaf hai deva ");
+           }
+
+           con.close();
+           smt.close();
+
+            System.out.println("Run effeciently");
+        }
+        catch (SQLException e) {
+            System.out.println("jhol jhaal ");
+        }
+
+        }
+    }
